@@ -8,4 +8,10 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_path
     end
   end
+
+  def check_user
+    if @current_user.id != @post.user.id
+      redirect_to posts_path
+    end
+  end
 end

@@ -6,10 +6,23 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <%= link_to posts_path do %> DiverInsta
+      <% end %>
+    </header>
+    <div class="notice">
+      <% if flash[:notice] %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+      <% if flash[:alert] %>
+      <p class="alert"><%= alert %></p>
+      <% end %>
+    </div>
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
@@ -21,5 +34,8 @@
       <%= link_to "Login", new_session_path %>
     <% end %>
     <%= yield %>
+    <footer class="footer clearfix">
+      <p>Copyright © 2020 This instagram clone is by Chipo. All Rights Reserved.</p>
+    </footer>
   </body>
 </html>

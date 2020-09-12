@@ -1,5 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :current_user
+  before_action :authenticate_user
+  before_action :logged_in?
+  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
@@ -17,7 +21,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    @user = @post.user.name
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -43,6 +47,7 @@ class PostsController < ApplicationController
 
   def confirm
     @post = current_user.posts.build(post_params)
+    @post.id = params[:id]
     render :new if @post.invalid?
   end
 
@@ -55,12 +60,11 @@ class PostsController < ApplicationController
   end
 
   private
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    def post_params
-      params.require(:post).permit(:posts)
-    end
-
+  def post_params
+  params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
+  end
 end
