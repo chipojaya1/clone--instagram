@@ -3,13 +3,13 @@ class PostsController < ApplicationController
   before_action :current_user
   before_action :authenticate_user
   before_action :logged_in?
-  before_action :check_user, only: [:edit, :update, :destroy]
 
   def index
     @posts = Post.all
   end
 
   def show
+    @favorite = current_user.favorites.find_by(post_id: @post.id)
   end
 
   def new
