@@ -1,8 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Posts:</strong>
-  <%= @post.posts %>
+<p>Posts:<%= @post.image %>
 </p>
 
 <% unless @post.user_id == current_user.id %>

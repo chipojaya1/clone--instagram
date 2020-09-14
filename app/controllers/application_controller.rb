@@ -3,15 +3,8 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def authenticate_user
-    if  @current_user == nil
-      flash[ :notice ]= t('notice.login_needed')
+    if @current_user == nil
       redirect_to new_session_path
-    end
-  end
-
-  def check_user
-    if @current_user.id!= @post.user.id
-      redirect_to posts_path
     end
   end
 end

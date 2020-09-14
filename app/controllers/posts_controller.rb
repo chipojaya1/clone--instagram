@@ -13,7 +13,11 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    if params[:back]
+      @post = Post.new(post_params)
+    else
+      @post = Post.new
+    end
   end
 
   def edit
@@ -21,10 +25,9 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -34,6 +37,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    if @post.user.id = current_user.id
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -65,6 +69,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-  params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
+    params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
   end
 end
