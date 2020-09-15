@@ -27,6 +27,7 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     respond_to do |format|
       if @post.save
+        ContactMailer.contact_mail(@posts).deliver
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -69,6 +70,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
+    params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id, :name, :email)
   end
 end
