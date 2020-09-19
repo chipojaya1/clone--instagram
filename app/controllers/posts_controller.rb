@@ -25,9 +25,10 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
+
     respond_to do |format|
       if @post.save
-        ContactMailer.contact_mail(@posts).deliver
+        PostMailer.post_mail(@posts).deliver
         format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
