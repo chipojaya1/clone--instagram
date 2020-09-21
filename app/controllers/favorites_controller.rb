@@ -8,4 +8,7 @@ class FavoritesController < ApplicationController
       favorite = current_user.favorites.find_by(id: params[:id]).destroy
       redirect_to posts_url, notice: "#you have deleted{favorite.post.user.name}'s post"
     end
+
+    def show
+      @favorites = current_user.favorites.order(created_at: "DESC")
 end
