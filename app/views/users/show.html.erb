@@ -1,2 +1,4 @@
 <h1><%= @user.name %>User</h1>
 <p>Email address: <%= @user.email %></p>
+<p>Icon: <%= image_tag(@user.icon.url) %></p>
+<%= link_to 'Back', users_path %>
