@@ -24,22 +24,20 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-
-    respond_to do |format|
-      if @post.save
-        PostMailer.post_mail(@posts).deliver
-        format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+    @post = current_user.posts.build(post_params
+      if params[:back]
+        render :new
       else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        if @post.save
+          PostMailer.post_mail(@posts)
+          redirect_to posts_path
+        else
+          render :new }
       end
     end
   end
 
   def update
-    if @post.user.id = current_user.id
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
