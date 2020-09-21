@@ -1,6 +1,6 @@
 class PostMailer < ApplicationMailer
-  def post_mail (post)
+  def post_mail(post)
     @post = post
-    mail to: "Your own email address",  subject: "Inquiry email confirmation"
+    mail to: @post.user.email,  subject: "Inquiry email confirmation"
   end
 end
