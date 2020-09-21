@@ -1,5 +1,7 @@
 <h1>  </h1>
 <%= @favorites.each do |favorite| %>
-  <p><%= favorite.post.post %></p>
+<div class="image">
   <% image_tag(favorite.post.image.url) if favorite.post.image && favorite.post.image.url %>
+</div>
+  <p><%= favorite.post.post %></p>
 <% end %>

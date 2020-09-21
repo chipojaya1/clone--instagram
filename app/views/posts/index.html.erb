@@ -1,22 +1,26 @@
 <h1>All Posts</h1>
 <%= link_to 'New Post', new_post_path %>
-<p id="notice"><%= notice %></p>
-<table>
-  <thead>
-    <tr>
-      <th>Posts</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.posts %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<% @posts.each do |post| %>
+<article class="post">
+  <p class="user">
+    <strong><%= post.user.name %></strong>
+  </p>
+  <hr>
+  <% if post.image && post.image.url %>
+  <%= image_tag post.image.url() %>
+  <% end %>
+  <p><%= post.posts %></p>
+  <br>
+  <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %></small>
+  <br>
+  <% if logged_in? %>
+    <span class="button"><%= link_to 'Show', post %></span>
+    <% if post.user.id == current_user.id %>
+            <span class="button"><%= link_to 'Edit', edit_post_path(post) %></span>
+      <span class="button"><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+      <br><br>
+      <% end %>
     <% end %>
-  </tbody>
-</table>
+</article>
+<% end %>
