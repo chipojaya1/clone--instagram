@@ -3,15 +3,8 @@
 
 <% @posts.each do |post| %>
 <article class="post">
-  <span class="icon">
-    <% if post.icon && post.icon.url %>
-  <%= image_tag post.icon.url() %>
-  <% end %>
-  </span>
-  <span class="user">
-    <strong><%= post.user.name %></strong>
-  </span>
-  <hr>
+  <strong><%= post.user.name %></strong>
+  <br>
   <% if post.image && post.image.url %>
   <%= image_tag post.image.url() %>
   <% end %>
