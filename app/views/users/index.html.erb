@@ -1,0 +1,17 @@
+<h1>Users</h1>
+<div class="signin">
+<% @users.each do |user| %>
+  <article class="user">
+    <%= image_tag(user.icon.url) %>
+    <br>
+    <%= user.name %>
+    <br>
+    <% if logged_in? %>
+      <% if user.id == current_user.id %>
+        <%= link_to 'Show', user %>
+        <%= link_to 'Edit', edit_user_path(user) %>
+      <% end %>
+    <% end %>
+  </article>
+<% end %>
+</div>
