@@ -3,9 +3,14 @@
 
 <% @posts.each do |post| %>
 <article class="post">
-  <p class="user">
+  <span class="icon">
+    <% if post.icon && post.icon.url %>
+  <%= image_tag post.icon.url() %>
+  <% end %>
+  </span>
+  <span class="user">
     <strong><%= post.user.name %></strong>
-  </p>
+  </span>
   <hr>
   <% if post.image && post.image.url %>
   <%= image_tag post.image.url() %>
@@ -17,7 +22,7 @@
   <% if logged_in? %>
     <span class="button"><%= link_to 'Show', post %></span>
     <% if post.user.id == current_user.id %>
-            <span class="button"><%= link_to 'Edit', edit_post_path(post) %></span>
+      <span class="button"><%= link_to 'Edit', edit_post_path(post) %></span>
       <span class="button"><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
       <br><br>
       <% end %>
