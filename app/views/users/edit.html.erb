@@ -1,23 +1,15 @@
 <h1>Editing User</h1>
-<%= form_with(model: user, local: true, url: user_path(@user.id)) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+<%= form_with(model: @user, local: true, url: user_path(@user.id)) do |form| %>
+  <% if @user.icon.present? %>
+    <%= image_tag(@user.icon.url) %>
+  <% else %>
+      <%= image_tag("no_image.jpeg") %>
   <% end %>
 
-  <div class="field">
-    <%= form.label :icon %>
-    <%= image_tag(@user.icon.url) if @user.icon && @user.icon.url %>
-    <%= form.file_field :icon %>
-    <%= form.hidden_field :icon_cache %>
-  </div>
+  <%= form.file_field :icon %>
+  <%= if @user.persisted? && @user.icon? %>
+    <%= form.check_box :remove_image, id:"remove_image" %>
+  <% end %>
 
   <div class="field">
     <%= form.label :name %>

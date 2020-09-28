@@ -1,4 +1,9 @@
 <h1><%= @user.name %>User</h1>
 <p>Email address: <%= @user.email %></p>
-<p>Icon: <%= image_tag(@user.icon.url) %></p>
-<%= link_to 'Back', users_path %>
+<% if @user.icon.present? %>
+  <%= image_tag(@user.icon.url) %>
+<% else %>
+    <%= image_tag("no_image.jpeg") %>
+<% end %>
+<%= link_to 'Edit', edit_user_url %>
+<%= link_to 'New', new_post_path %>
