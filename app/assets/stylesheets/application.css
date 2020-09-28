@@ -14,3 +14,17 @@
  *= require_tree .
  *= require_self
  */
+html {
+  position: relative;
+  font-size: 62.5%;
+  min_height: 100%;
+}
+body {
+  height: 100%;
+  background-size: auto;
+  background-position: right;
+  background-repeat: no-repeat;
+  background: linear-gradient(135deg, rgba(179, 0, 170, 0.6) rgba(247, 199, 18, 0.6);
+  text-align: center;
+  
+}
