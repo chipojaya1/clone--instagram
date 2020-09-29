@@ -1,7 +1,15 @@
-<h1>  </h1>
+<div class="details">
+  <p>name: <%= current_user.name %></p>
+  <p>email: <%= current_user.email %></p>
+</div>
+<div class="user_icon">
+  <%= image_tag(current_user.icon.url) if current_user.icon && current_user.icon.url %>
+</div>
+
 <%= @favorites.each do |favorite| %>
 <div class="image">
+  <%= link_to post_path(favorite.post.id) do %>
   <% image_tag(favorite.post.image.url) if favorite.post.image && favorite.post.image.url %>
+  <% end %>
 </div>
-  <p><%= favorite.post.post %></p>
 <% end %>

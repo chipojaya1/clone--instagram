@@ -11,26 +11,30 @@
   </head>
 
   <body>
-    <div class="text-center">
     <header>
-      <%= link_to posts_path do %> DiverInsta
-      <% end %>
-          <% if logged_in? %>
-        <button type="button" class="btn btn-default"><%= link_to "Profile", user_path(current_user.id) %>
-        <button type="button" class="btn btn-default"><%= link_to "Logout", session_path(current_user.id), method: :delete %>
-      <% else %>
-        <button type="button" class="btn btn-default"><%= link_to "Sign up", new_user_path %>
-        <button type="button" class="btn btn-default"><%= link_to "Login", new_session_path %>
-      <% end %>
-      </header>
-      <% if current_user.present? %>
-      <button type="button" class="btn btn-default"><%= link_to "My profile", icon_users_path %>
-      <button type="button" class="btn btn-default"><%= link_to "Favorite", favorite_path(current_user.id) %>
-      <% end %>
+      <div class="left">
+      <%= link_to posts_path do %><h3>DiverInsta</h3>
+        <% end %>
+      </div>
+      <div class="right">
+        <% if logged_in? %>
+        <button type="button" class="btn btn-default"><%= link_to "DiverInsta", posts_path %>
+        <% else %>
+          <button type="button" class="btn btn-default"><%= link_to "Sign up", new_user_path %>
+          <button type="button" class="btn btn-default"><%= link_to "Login", new_session_path %>
+        <% end %>
+        <% if current_user.present? %>
+          <button type="button" class="btn btn-default"><%= link_to "Favorite", favorite_path(current_user.id) %>
+          <button type="button" class="btn btn-default"><%= link_to "Logout", session_path(current_user.id), method: :delete %>
+          <button type="button" class="btn btn-default"><%= link_to user_path(current_user.id) do %>
+            <%= image_tag(current_user.icon.url) if current_user.icon && current_user.icon.url %>
+          <% end %>
+        <% end %>
+      </div>
+    </header>
       <% flash.each do |key, value| %>
         <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
     <%= yield %>
-    </div>
   </body>
 </html>

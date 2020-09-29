@@ -1,16 +1,43 @@
+html {
+  font-size: 62.5%;
+  height: 100%;
+}
+body {
+  color: #333;
+  font-size: 13px;
+  background-color: lightgray;
+  width: 980px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 100%;
+  font-size: 1.5rem;
+}
 header {
   width: 100%;
-  background-color: purple;
+  background-color: white;
   font-style: italic;
   length: 100%;
-  text-align: center;
-  padding: 10px;
-  font-size: 2.5px;
-  font-stretch: expanded;
-  font-weight: bold;
   display: flex;
+  word-spacing: 2rem;
+    padding: 10px;
+    font-weight: bold;
+    margin-right: 0;
 }
+.left {
+  float: left;
+}
+.text-right {
+  float: right;
 
+}
+footer {
+  width: 100%;
+  background-color: purple;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -24,10 +51,10 @@ pre {
 }
 
 a {
-  color: white;
+  color: black;
 
   &:hover {
-    color: #fff;
+    color: gray;
   }
 }
 

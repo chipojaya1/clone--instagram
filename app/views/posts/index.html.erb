@@ -3,22 +3,30 @@
 
 <% @posts.each do |post| %>
 <article class="post">
-  <strong><%= post.user.name %></strong>
+  <span>
+    <%= link_to user_path(current_user.id) do %>
+      <%= image_tag(current_user.icon.url) if current_user.icon && current_user.icon.url %>
+    <% end %>
+  </span>
+  <span>
+    <strong><%= post.user.name %></strong>
+  </span>
+  <span>
+    <% if logged_in? %>
+      <span class="button"><%= link_to 'Show', post %></span>
+      <% if post.user.id == current_user.id %>
+        <span class="button"><%= link_to 'Edit', edit_post_path(post) %></span>
+        <span class="button"><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+        <% end %>
+  </span>
   <br>
   <% if post.image && post.image.url %>
   <%= image_tag post.image.url() %>
   <% end %>
   <p><%= post.posts %></p>
-  <br>
   <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %></small>
-  <br>
-  <% if logged_in? %>
-    <span class="button"><%= link_to 'Show', post %></span>
-    <% if post.user.id == current_user.id %>
-      <span class="button"><%= link_to 'Edit', edit_post_path(post) %></span>
-      <span class="button"><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-      <br><br>
-      <% end %>
+
+      <hr>
     <% end %>
 </article>
 <% end %>
