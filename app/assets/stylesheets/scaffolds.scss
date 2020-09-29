@@ -19,15 +19,31 @@ header {
   length: 100%;
   display: flex;
   word-spacing: 2rem;
-    padding: 10px;
-    font-weight: bold;
-    margin-right: 0;
+  padding: 10px;
+  font-weight: bold;
+  margin-right: 0;
 }
-.left {
-  float: left;
+.headbook {
+  overflow: scroll;
+  height: 600px;
 }
-.text-right {
-  float: right;
+article {
+
+}
+.post {
+  width: 60%;
+  height: auto;
+  margin: auto;
+  background-color: white;
+  border: solid;
+}
+.icon {
+
+}
+.image{
+
+}
+aside{
 
 }
 footer {
@@ -42,12 +58,6 @@ p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
 }
 
 a {
@@ -95,7 +105,6 @@ div {
     padding: 5px 5px 5px 15px;
     font-size: 12px;
     margin: -7px -7px 0;
-    background-color: #c00;
     color: #fff;
   }
 
@@ -107,10 +116,4 @@ div {
 
 label {
   display: block;
-}
-.image {
-  display: flex;
-  width: 120px;
-  height: 60px;
-  margin: auto;
 }

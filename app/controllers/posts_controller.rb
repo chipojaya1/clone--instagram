@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   before_action :logged_in?
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order(created_at: "DESC")
+    @users = User.all.order(created_at: "DESC")
   end
 
   def show
@@ -22,20 +23,18 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
   end
 
   def create
     @post = current_user.posts.build(post_params)
-
-    respond_to do |format|
-      if @post.save
-        PostMailer.post_mail(@post).deliver
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if params[:back]
+      render :new
+    else
+      @post.save
+      PostMailer.contact_mail(@post).deliver
+      flash[:notice] = 'post created'
+      redirect_to posts_path
     end
   end
 
@@ -53,7 +52,6 @@ class PostsController < ApplicationController
 
   def confirm
     @post = current_user.posts.build(post_params)
-    @post.id = params[:id]
     render :new if @post.invalid?
   end
 

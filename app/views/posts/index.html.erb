@@ -1,32 +1,40 @@
 <h1>All Posts</h1>
+
 <%= link_to 'New Post', new_post_path %>
 
 <% @posts.each do |post| %>
 <article class="post">
-  <span>
-    <%= link_to user_path(current_user.id) do %>
-      <%= image_tag(current_user.icon.url) if current_user.icon && current_user.icon.url %>
-    <% end %>
-  </span>
-  <span>
+  <% if logged_in? %>
+  <button type="button" class="btn btn-primary"><%= link_to 'Show', post_path(post.id) %>
+  <br>
+  <% if current_user.icon && current_user.icon.url %>
+    <%= image_tag current_user.icon.url(), class: "icon" %>
+  <% end %>
+  <p class="content">
     <strong><%= post.user.name %></strong>
-  </span>
-  <span>
-    <% if logged_in? %>
-      <span class="button"><%= link_to 'Show', post %></span>
-      <% if post.user.id == current_user.id %>
-        <span class="button"><%= link_to 'Edit', edit_post_path(post) %></span>
-        <span class="button"><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
-        <% end %>
-  </span>
+  </p>
   <br>
   <% if post.image && post.image.url %>
-  <%= image_tag post.image.url() %>
+    <%= image_tag post.image.url(), class: "image" %>
   <% end %>
-  <p><%= post.posts %></p>
+  <br>
   <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %></small>
-
-      <hr>
-    <% end %>
+  <br>
+  <p><%= post.posts %></p>
+  <% end %>
 </article>
-<% end %>
+
+<aside>
+  <%= link_to users_path %>
+  <% @users.each do |user| %>
+  <span>
+    <%= link_to user_path(user.id) do %>
+      <%= image_tag(user.icon.url) if user.icon && user.icon.url %>
+    <% end %>
+  </span>
+  <span>
+    <%= link_to "#{user.name}", user_path(user.id) %>
+    <% end %>
+  </span>
+  <% end %>
+</aside>

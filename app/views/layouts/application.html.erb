@@ -12,13 +12,13 @@
 
   <body>
     <header>
-      <div class="left">
+      <div class="ul-left">
       <%= link_to posts_path do %><h3>DiverInsta</h3>
         <% end %>
       </div>
-      <div class="right">
+      <div class="ul-right">
         <% if logged_in? %>
-        <button type="button" class="btn btn-default"><%= link_to "DiverInsta", posts_path %>
+        <button type="button" class="btn btn-default"><%= link_to "Home", posts_path %>
         <% else %>
           <button type="button" class="btn btn-default"><%= link_to "Sign up", new_user_path %>
           <button type="button" class="btn btn-default"><%= link_to "Login", new_session_path %>

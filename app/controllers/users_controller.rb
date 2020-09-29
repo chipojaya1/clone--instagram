@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
 
   def index
-    @users = User.all
+    @users = User.all.order(created_at: "DESC")
   end
 
   def new
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     else
       if @user.save
         session[:user_id] = @user.id
-        redirect_to user_path(@user.id)
+        redirect_to @user, notice: 'Acoount created'
       else
         render :new
       end
@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def show
