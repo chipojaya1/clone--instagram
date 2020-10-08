@@ -14,7 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.11'
 gem 'mini_magick', '~> 4.8'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'faker'
+gem 'faker', :require => false
 gem 'carrierwave', '~> 2.0'
 
 group :development, :test do

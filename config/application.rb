@@ -12,9 +12,10 @@ module Cloneinsta
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
-    config.generators do |g|
+    config.load_defaults 5.2
+
     # Settings in config/environments/* take precedence over those specified here.
+    config.generators do |g|
       g.assets false
       g.helper false
     end
