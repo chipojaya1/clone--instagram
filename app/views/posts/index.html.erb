@@ -4,37 +4,19 @@
 
 <% @posts.each do |post| %>
 <article class="post">
-  <% if logged_in? %>
-  <button type="button" class="btn btn-primary"><%= link_to 'Show', post_path(post.id) %>
-  <br>
+<% if logged_in? %>
+  <button type="button" class="btn btn-default"><%= link_to 'Show', post %>
   <% if current_user.icon && current_user.icon.url %>
     <%= image_tag current_user.icon.url(), class: "icon" %>
   <% end %>
-  <p class="content">
-    <strong><%= post.user.name %></strong>
-  </p>
-  <br>
+  <small><strong><%= post.user.name %></strong></small>
   <% if post.image && post.image.url %>
     <%= image_tag post.image.url(), class: "image" %>
   <% end %>
   <br>
-  <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %></small>
+  <large><%= post.posts %></large>
   <br>
-  <p><%= post.posts %></p>
+  <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %></small>
   <% end %>
-</article>
-
-<aside>
-  <%= link_to users_path %>
-  <% @users.each do |user| %>
-  <span>
-    <%= link_to user_path(user.id) do %>
-      <%= image_tag(user.icon.url) if user.icon && user.icon.url %>
-    <% end %>
-  </span>
-  <span>
-    <%= link_to "#{user.name}", user_path(user.id) %>
-    <% end %>
-  </span>
-  <% end %>
-</aside>
+  </article>
+<% end %>
