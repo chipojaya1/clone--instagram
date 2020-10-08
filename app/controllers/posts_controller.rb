@@ -5,12 +5,10 @@ class PostsController < ApplicationController
   before_action :logged_in?
 
   def index
-    @posts = Post.all.order(created_at: "DESC")
-    @users = User.all.order(created_at: "DESC")
+    @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
     @favorite = current_user.favorites.find_by(post_id: @post.id)
   end
 
@@ -32,7 +30,7 @@ class PostsController < ApplicationController
       render :new
     else
       @post.save
-      PostMailer.contact_mail(@post).deliver
+      PostMailer.post_mail(@post).deliver
       flash[:notice] = 'post created'
       redirect_to posts_path
     end
@@ -51,8 +49,8 @@ class PostsController < ApplicationController
   end
 
   def confirm
-    @post = current_user.posts.build(post_params)
-    render :new if @post.invalid?
+    @post = Post.new(post_params)
+    @post.user_id = current_user.id
   end
 
   def destroy
