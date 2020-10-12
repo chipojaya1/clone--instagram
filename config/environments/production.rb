@@ -93,7 +93,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'instgramc.herokuapp.com' }
-  
-  confi.action_mailer.delivery_method = :letter_opener_web
 
+  config.action_mailer.delivery_method = :letter_opener_web
 end
